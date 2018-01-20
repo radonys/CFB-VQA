@@ -2,6 +2,7 @@ from src import app
 # from flask import jsonify
 from flask import render_template,request
 from VQA import predict
+import sys
 UPLOAD_FOLDER = '/path/to/the/uploads'
 @app.route("/", methods = ['GET', 'POST'])
 def home():
