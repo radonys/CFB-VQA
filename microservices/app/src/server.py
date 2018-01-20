@@ -14,7 +14,7 @@ def home():
             print "POST FORM"
             file1 = request.files['file']
             ques = request.form["question"]
-            temp = os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg')
+            temp = os.path.join(UPLOAD_FOLDER, 'image.jpg')
             print temp
             file1.save(temp)
             print file1,type(file1)
