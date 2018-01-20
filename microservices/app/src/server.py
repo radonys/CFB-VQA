@@ -6,6 +6,7 @@ import sys
 UPLOAD_FOLDER = '/path/to/the/uploads'
 @app.route("/", methods = ['GET', 'POST'])
 def home():
+    print "Hello"
     if request.method == 'GET':
         return render_template('index.html')
     if request.method == 'POST':
