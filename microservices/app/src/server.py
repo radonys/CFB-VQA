@@ -7,6 +7,7 @@ UPLOAD_FOLDER = '/app/src/static'
 @app.route("/", methods = ['GET', 'POST'])
 def home():
     print "Hello"
+    print request.args
     if request.method == 'POST':
         if "question" in request.args:
             print "POST FORM"
@@ -19,6 +20,9 @@ def home():
             result = predict(temp,ques)
             print result
             return render_template('index.html',result=result)
+        else:
+            print "NO question came"
+            return "oops"
     else:
         return render_template('index.html')
 
