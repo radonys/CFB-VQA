@@ -4,7 +4,7 @@ from flask import render_template,request
 from VQA import predict
 import sys
 UPLOAD_FOLDER = '/path/to/the/uploads'
-@app.route("/", methods = ['GET', 'POST'])
+@app.route("/*", methods = ['GET', 'POST'])
 def home():
     print "Hello"
     if request.method == 'GET':
