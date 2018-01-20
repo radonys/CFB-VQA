@@ -25,7 +25,7 @@ def load_image_array(image_file):
     img = preprocess_input(img)
     return img
 
-def get_ques_vector(question="What is flying in the sky?"):
+def get_ques_vector(question):
     question_vector = []
     seq_length = 26
     word_index = metadata['ix_to_word']
@@ -38,7 +38,7 @@ def get_ques_vector(question="What is flying in the sky?"):
     question_vector = question_vector.reshape((1,seq_length))
     return question_vector
 
-def predict(image_path="kite.jpeg"):
+def predict(image_path="kite.jpeg",question="What is flying in the sky?"):
     json_file = open(model_filename, 'r')
     loaded_model_json = json_file.read()
     print "Reading Model..."
@@ -47,7 +47,7 @@ def predict(image_path="kite.jpeg"):
     model.load_weights(model_weights_filename)
     img = load_image_array(image_path)
     img_vector = model_vgg.predict(img)
-    question_vector = get_ques_vector()
+    question_vector = get_ques_vector(question)
     model.compile(optimizer='rmsprop', loss='categorical_crossentropy')
     pred = model.predict([img_vector, question_vector])[0]
     top_pred = pred.argsort()[-5:][::-1]
