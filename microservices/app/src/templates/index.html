@@ -84,8 +84,8 @@
                         {%  if result|length == 0  %}
                             <span>Your Result Will Be Here. </span>
                         {% else %}
-                            {% for key, value in result.iteritems() %}
-                                {{ key }}&nbsp;{{ value }}
+                            {% for key in result %}
+                                {{ key[0] }}&nbsp;{{ key[1] }}
                                 <br>
                             {% endfor %}
                         {% endif %}
