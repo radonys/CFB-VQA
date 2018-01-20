@@ -3,13 +3,13 @@ from src import app
 from flask import render_template,request
 from VQA import predict
 import sys
-UPLOAD_FOLDER = '/path/to/the/uploads'
-@app.route("/*", methods = ['GET', 'POST'])
+UPLOAD_FOLDER = '/app/src/static'
+@app.route("/", methods = ['GET', 'POST'])
 def home():
     print "Hello"
-    if request.method == 'GET':
+    if request.method == 'POST':
         if "question" in request.args:
-            print "GET FORM"
+            print "POST FORM"
             file1 = request.files['file']
             ques = request.args["question"]
             temp = os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg')
@@ -19,8 +19,8 @@ def home():
             result = predict(temp,ques)
             print result
             return render_template('index.html',result=result)
-        else:
-            return render_template('index.html')
+    else:
+        return render_template('index.html')
 
     # if request.method == 'POST':
         # file1 = request.files['file']
