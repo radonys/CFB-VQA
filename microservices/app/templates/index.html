@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>CodeForBeer</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <link href="css/style.css" rel="stylesheet">
+        <script>
+            function adjustHeight() {
+                var h = document.getElementsByTagName('body')[0].clientHeight;
+                var h1= document.getElementById("heading").clientHeight + document.getElementById("QndA").clientHeight+ document.getElementById("topic").clientHeight;
+                if(h>h1)
+                {
+                    document.getElementById('adjust').style.height=h-h1+"px";
+                }
+            }
+            
+            function setPreview(input){
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                      $('#preview').attr('src', e.target.result);
+                      $('#preview').attr('width', 200);
+                    }
+                    reader.onloadend = function(e){
+                        adjustHeight();
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+              } 
+            }
+        </script>
+        
+    </head>
+    <body onresize="adjustHeight()" onload="adjustHeight()">
+        <div class="container-fluid" id="heading">
+            <div class="row">
+                <div class="col-md-12">
+                    <span style="border: 2px solid white;padding: 4px;margin: 4px;">Code</span><span><b>ForBeer</b></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-fluid" id="topic">
+            <div class="row">
+                <div class="col-md-12">
+                    <span style="border: 3px solid grey;padding: 8px;margin: 4px;">Visual</span><span><b>QuestionAnswer</b></span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="adjust"></div>
+        
+        <div class="container-fluid" id="QndA">
+            <div class="row">
+                    <div class="col-md-12">
+                        <img src="" id="preview">
+                    </div>
+                </div>
+            
+            <form method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="file" style="display:inline;" name="photo" onchange="setPreview(this)">
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+
+                            <input type="search" placeholder="Hey! Put here your questions in words.">
+                            <button>Go >></button>
+
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="resultArea">
+                        <span>Your Result Will Be Here. </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

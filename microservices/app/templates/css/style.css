@@ -1,0 +1,63 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+    background: #F9F9F9;
+}
+#heading .col-md-12{
+    width: 100%;
+    background: #F57C00;
+    box-shadow: 0px 1px 2px 2px #BDBDBD;
+    padding: 15px;
+}
+#heading span{
+    color: white;
+    font-size: 1.4em;
+}
+#adjust{
+    background: #F9F9F9;
+}
+#QndA .col-md-12{
+    text-align: center;
+    padding: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+#QndA input[type=search]{
+    width: 70vw;
+    padding: 10px;
+    color: grey;
+    font-size: 1.2em;
+    border: 1px solid #BDBDBD;
+    margin: 5px;
+    box-shadow: 0.5px 0.5px 10px 2px #BDBDBD;
+}
+#QndA input[type=file]{
+    border: 2px solid white;
+    font-size: 1.2em;
+    box-shadow: 0.5px 0.5px 10px 2px #BDBDBD;
+}
+#QndA button{
+    background: #F57C00;
+    color: white;
+    font-size: 1.2em;
+    padding: 10px;
+    border-radius: 2px;
+    font-weight: bold;
+    margin: 5px;
+    border:2px solid white;
+    box-shadow: 0.5px 0.5px 10px 2px #BDBDBD;
+}
+#QndA #resultArea{
+    padding: 20px;
+    background: white;
+    text-align: center;
+    color: grey;
+    font-size: 1.4em;
+    border: 2px solid white;
+    box-shadow: inset 0.5px 0.5px 5px 2px #BDBDBD;
+}
+#topic .col-md-12{
+    font-size: 4em;
+    color: grey;
+    text-align: center;
+    padding: 50px;
+}
