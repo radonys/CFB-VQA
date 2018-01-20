@@ -4,7 +4,7 @@ from flask import render_template
 
 @app.route("/")
 def home():
-    return render_template('/app/src/index.html')
+    return render_template('index.html')
 
 # Uncomment to add a new URL at /new
 
