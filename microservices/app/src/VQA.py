@@ -13,9 +13,9 @@ from keras.models import Model
 import pickle
 base_model = VGG19(weights='imagenet')
 model_vgg = Model(input=base_model.input, output=base_model.get_layer('fc2').output)
-model_filename = 'resources/model.json'
-model_weights_filename = 'resources/model_weights.h5'
-metadata = json.load(open('resources/data_prepro.json', 'r'))
+model_filename = '/app/src/resources/model.json'
+model_weights_filename = '/app/src/resources/model_weights.h5'
+metadata = json.load(open('/app/src/resources/data_prepro.json', 'r'))
 metadata['ix_to_word'] = {str(word):int(i) for i,word in metadata['ix_to_word'].items()}
 
 def load_image_array(image_file):

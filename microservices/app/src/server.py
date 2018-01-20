@@ -8,6 +8,7 @@ def home():
         return render_template('index.html')
     if request.method == 'POST':
         file1 = request.files['file']
+        
         print file1,type(file1)
         return render_template('index.html')
 
