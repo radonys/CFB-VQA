@@ -1,4 +1,5 @@
 from src import app
+import os
 # from flask import jsonify
 from flask import render_template,request
 from VQA import predict
