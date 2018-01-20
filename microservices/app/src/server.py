@@ -7,12 +7,12 @@ UPLOAD_FOLDER = '/app/src/static'
 @app.route("/", methods = ['GET', 'POST'])
 def home():
     print "Hello"
-    print request.args
+    print request.args,request.form
     if request.method == 'POST':
-        if "question" in request.args:
+        if "question" in request.form:
             print "POST FORM"
             file1 = request.files['file']
-            ques = request.args["question"]
+            ques = request.form["question"]
             temp = os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg')
             print temp
             file1.save(temp)
