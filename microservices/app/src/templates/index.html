@@ -6,7 +6,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        
+
         <link href="static/css/style.css" rel="stylesheet">
         <script>
             function adjustHeight() {
@@ -17,7 +17,7 @@
                     document.getElementById('adjust').style.height=h-h1+"px";
                 }
             }
-            
+
             function setPreview(input){
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
@@ -31,10 +31,10 @@
                     }
 
                     reader.readAsDataURL(input.files[0]);
-              } 
+              }
             }
         </script>
-        
+
     </head>
     <body onresize="adjustHeight()" onload="adjustHeight()">
         <div class="container-fluid" id="heading">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="container-fluid" id="topic">
             <div class="row">
                 <div class="col-md-12">
@@ -52,23 +52,23 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="adjust"></div>
-        
+
         <div class="container-fluid" id="QndA">
             <div class="row">
                     <div class="col-md-12">
                         <img src="" id="preview">
                     </div>
                 </div>
-            
+
             <form method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-12">
                         <input type="file" style="display:inline;" name="photo" onchange="setPreview(this)">
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-md-12">
 
@@ -80,8 +80,15 @@
             </form>
             <div class="row">
                 <div class="col-md-12">
-                    <div id="resultArea">
-                        <span>Your Result Will Be Here. </span>
+                  <div id="resultArea">
+                        {%  if result|length == 0  %}
+                            <span>Your Result Will Be Here. </span>
+                        {% else %}
+                            {% for key, value in result.iteritems() %}
+                                {{ key }}&nbsp;{{ value }}
+                                <br>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
