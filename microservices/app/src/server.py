@@ -8,18 +8,31 @@ UPLOAD_FOLDER = '/path/to/the/uploads'
 def home():
     print "Hello"
     if request.method == 'GET':
-        return render_template('index.html')
-    if request.method == 'POST':
-        file1 = request.files['file']
-        ques = request.post["question"]
-        temp = os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg')
-        print temp
-        file1.save(temp)
-        print file1,type(file1)
-        result = predict(temp,ques)
-        print result
-        sys.stdout.flush()
-        return render_template('index.html',result=result)
+        if "question" in request.get:
+            print "GET FORM"
+            file1 = request.files['file']
+            ques = request.post["question"]
+            temp = os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg')
+            print temp
+            file1.save(temp)
+            print file1,type(file1)
+            result = predict(temp,ques)
+            print result
+            return render_template('index.html',result=result)
+        else:
+            return render_template('index.html')
+
+    # if request.method == 'POST':
+        # file1 = request.files['file']
+        # ques = request.post["question"]
+        # temp = os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg')
+        # print temp
+        # file1.save(temp)
+        # print file1,type(file1)
+        # result = predict(temp,ques)
+        # print result
+        # sys.stdout.flush()
+        # return render_template('index.html',result=result)
 
 sys.stdout.flush()
 # Uncomment to add a new URL at /new
