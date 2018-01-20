@@ -9,7 +9,7 @@ def home():
         return render_template('index.html')
     if request.method == 'POST':
         file1 = request.files['file']
-        temp = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        temp = os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg')
         file1.save(temp)
         print file1,type(file1)
         result = predict(temp)
