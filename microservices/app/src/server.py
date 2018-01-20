@@ -8,10 +8,10 @@ UPLOAD_FOLDER = '/path/to/the/uploads'
 def home():
     print "Hello"
     if request.method == 'GET':
-        if "question" in request.get:
+        if "question" in request.args:
             print "GET FORM"
             file1 = request.files['file']
-            ques = request.post["question"]
+            ques = request.args["question"]
             temp = os.path.join(app.config['UPLOAD_FOLDER'], 'image.jpg')
             print temp
             file1.save(temp)
