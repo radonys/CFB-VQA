@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <title>CodeForBeer</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link href="static/css/style.css" rel="stylesheet">
+        <script>
+            function adjustHeight() {
+                var h = document.getElementsByTagName('body')[0].clientHeight;
+                var h1= document.getElementById("heading").clientHeight + document.getElementById("QndA").clientHeight+ document.getElementById("topic").clientHeight;
+                if(h>h1)
+                {
+                    document.getElementById('adjust').style.height=h-h1+"px";
+                }
+            }
+
+            function setPreview(input){
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                      $('#preview').attr('src', e.target.result);
+                      $('#preview').attr('width', 200);
+                    }
+                    reader.onloadend = function(e){
+                        adjustHeight();
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+              }
+            }
+        </script>
+
+    </head>
+    <body onresize="adjustHeight()" onload="adjustHeight()">
+        <div class="container-fluid" id="heading">
+            <div class="row">
+                <div class="col-md-12">
+                    <span style="border: 2px solid white;padding: 4px;margin: 4px;">Code</span><span><b>ForBeer</b></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" id="topic">
+            <div class="row">
+                <div class="col-md-12">
+                    <span style="border: 3px solid grey;padding: 8px;margin: 4px;">Visual</span><span><b>QuestionAnswer</b></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="adjust"></div>
+
+        <div class="container-fluid" id="QndA">
+            <div class="row">
+                    <div class="col-md-12">
+                        <img src="" id="preview">
+                    </div>
+                </div>
+
+            <form method="post" enctype="multipart/form-data" id="formdata">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="file" style="display:inline;" name="file" onchange="setPreview(this)">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                            <input type="search" placeholder="Hey! Put here your questions in words." name="question">
+                            <button type="button" onclick="send()" id="but">Go >></button>
+
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-md-12">
+                  <div id="resultArea">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+        function send()
+        {
+          console.log("Function called");
+          document.getElementById("but").disabled=true;
+          document.getElementById("but").innerHTML="Loading";
+          var data = new FormData(document.getElementById('formdata'));
+          fetch('',{method:'post',body:data})
+          .then(response =>response.json())
+.catch(error =>{console.error('Error:', error);
+document.getElementById("but").disabled=false;
+  document.getElementById("but").innerHTML="Go >>";})
+.then(response => {
+  console.log('Success:', response);
+  var t ="";
+  for(i=0;i<response.result.length;i++)
+  {
+    if(!i)
+      t+="<b>"+response.result[i][0]+" &nbsp; confidence:"+response.result[i][1]+"</b><br>";
+    else {
+      t+=""+response.result[i][0]+" &nbsp; confidence:"+response.result[i][1]+"<br>";
+
+    }
+  }
+  document.getElementById("resultArea").innerHTML=t;
+  document.getElementById("but").disabled=false;
+  document.getElementById("but").innerHTML="Go >>";
+});
+
+        }
+        </script>
+    </body>
+</html>
