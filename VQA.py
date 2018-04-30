@@ -12,6 +12,7 @@ from keras.models import Model
 # import redis
 import pickle
 import os
+from tqdm import tqdm
 PATH="resources"
 base_model = VGG19(weights='imagenet')
 model_vgg = Model(input=base_model.input, output=base_model.get_layer('fc2').output)
@@ -56,3 +57,21 @@ def predict(image_path="kite.jpeg",question="What is flying in the sky?"):
     return [(metadata['ix_to_ans'][str(_)].title(), round(pred[_]*100.0,2)) for _ in top_pred]
     # print (preds)
 # predict()
+def eval(annotations):
+    res = []
+    json_file = open(model_filename, 'r')
+    loaded_model_json = json_file.read()
+    print "Reading Model..."
+    model = model_from_json(loaded_model_json)
+    print "Loading Weights..."
+    model.load_weights(model_weights_filename)
+    model.compile(optimizer='rmsprop', loss='categorical_crossentropy')
+    for path in tqdm(annotations):
+        img = load_image_array(path["img_path"])
+        img_vector = model_vgg.predict(img)
+        question_vector = get_ques_vector(path[question])
+        pred = model.predict([img_vector, question_vector])[0]
+        top_pred = pred.argsort()[-5:][::-1]
+        res.append({"answer":metadata['ix_to_ans'][str(top_pred[0])].title(),"question_id":path["ques_id"]})
+    print "Result ready"
+    json.dump(res,open("result.json"))
